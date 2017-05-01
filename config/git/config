@@ -1,0 +1,28 @@
+[user]
+	name = Jan-Philipp Litza
+	email = janphilipp@litza.de
+[url "ssh://git@github.com/"]
+	pushInsteadOf = https://github.com/
+[url "ssh://git@gist.github.com/"]
+	pushInsteadOf = https://gist.github.com/
+[alias]
+	wdiff = diff --color-words
+	graph = log --oneline --graph --decorate --all --pretty=short
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+[push]
+	default = simple
+[branch]
+	autosetuprebase = always
+[format]
+	headers = BCC: janphilipp@litza.de
+[transfer]
+	fsckobjects = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+[color]
+	ui = auto
+[init]
+	templatedir = ~/.config/git/template
+[gpg]
+	program = gpg2

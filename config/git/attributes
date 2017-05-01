@@ -1,0 +1,9 @@
+*.pdf -diff
+*.tex diff=tex
+*.bib diff=bibtex
+*.cpp diff=cpp
+*.html diff=html
+*.java diff=java
+*.php diff=php
+*.py diff=python
+*.rb diff=ruby

@@ -1,0 +1,42 @@
+# Vim swap files
+.*.swp
+
+# Vim local config
+_vimrc_local.vim
+
+# general backup files
+*.bak
+
+# Scribus automatically saved files
+*.autosave
+
+# OpenOffice lock files
+.~lock.*#
+
+# Python bytecode cache
+__pycache__
+*.pyc
+
+# TeX auxilliary files
+*.aux
+*.log
+*.bbl
+*.blg
+*-blx.bib
+*.out
+*.tdo
+*.toc
+*.fls
+*.ext
+*.idx
+*.snm
+*.nav
+*.maf
+*.mtc?
+*.mtc
+*.fdb_latexmk
+*.synctex.gz
+*.run.xml
+
+# Seafile ignore list
+seafile-ignore.txt
