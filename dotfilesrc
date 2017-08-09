@@ -2,5 +2,5 @@
 repository = ~/.config/dotfiles
 packages = ['config', 'ssh', 'gnupg']
 ignore = ['.git', '*.swp']
-external = {
+externals = {
     '.ccache': '.cache/ccache'}
