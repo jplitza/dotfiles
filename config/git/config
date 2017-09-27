@@ -1,6 +1,9 @@
 [user]
 	name = Jan-Philipp Litza
 	email = janphilipp@litza.de
+[core]
+	excludesfile = ~/.config/git/ignore
+	attributesfile = ~/.config/git/attributes
 [url "ssh://git@github.com/"]
 	pushInsteadOf = https://github.com/
 [url "ssh://git@gist.github.com/"]
