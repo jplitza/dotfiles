@@ -3,4 +3,5 @@ repository = ~/.config/dotfiles
 packages = ['config', 'ssh', 'gnupg']
 ignore = ['.git', '*.swp', '.gitmodules']
 externals = {
+    '.sqlite_history': '/dev/null',
     '.ccache': '.cache/ccache'}
