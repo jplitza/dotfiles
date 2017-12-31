@@ -1,2 +1,6 @@
 #!/bin/sh
-exec pep8 --ignore=E501 .
+if which flake8; then
+  exec flake8 --ignore=E501 .
+elif which pep8; then
+  exec pep8 --ignore=E501 .
+fi
