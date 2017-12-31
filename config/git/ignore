@@ -40,3 +40,10 @@ __pycache__
 
 # Seafile ignore list
 seafile-ignore.txt
+
+# Java / Android
+gradlew
+gradlew.bat
+local.properties
+.idea
+.gradle
