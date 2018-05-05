@@ -12,6 +12,7 @@ TCPKeepAlive no
 # UpdateHostKeys ask # incompatible with ControlMaster auto
 PreferredAuthentications publickey,keyboard-interactive,password
 
+IgnoreUnknown Include
 Include config.local
 
 # These are commonly ephemeral addresses, so don't care about host keys
