@@ -1,6 +1,5 @@
 VerifyHostKeyDNS ask
 UseRoaming no
-ForwardAgent no
 ControlMaster auto
 ControlPath /run/user/%i/ssh-%C.sock
 ControlPersist 60
@@ -21,4 +20,5 @@ Host 192.168.* fe80:*%*
     StrictHostKeyChecking no
 
 Host *
+    ForwardAgent no
     User root
