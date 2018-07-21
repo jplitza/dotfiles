@@ -637,8 +637,8 @@ MAILCHECK=30
 # 5 seconds
 REPORTTIME=5
 
-# watch for everyone but me and root
-watch=(notme root)
+# watch for nobody
+watch=()
 
 # automatically remove duplicates from these arrays
 typeset -U path PATH cdpath CDPATH fpath FPATH manpath MANPATH
