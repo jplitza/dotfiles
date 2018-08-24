@@ -1,6 +1,10 @@
 #!/bin/sh
 if which flake8; then
-  exec flake8 --ignore=E501 .
+  flake8 --ignore=E501 .
 elif which pep8; then
-  exec pep8 --ignore=E501 .
+  pep8 --ignore=E501 .
+fi
+
+if which shellcheck; then
+  find . -name '*.sh' -exec shellcheck {} +
 fi
