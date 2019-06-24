@@ -4,6 +4,7 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 	attributesfile = ~/.config/git/attributes
+	hooksPath = ~/.config/git/hooks
 [url "ssh://git@github.com/"]
 	pushInsteadOf = https://github.com/
 [url "ssh://git@gist.github.com/"]
@@ -25,7 +26,5 @@
 	autoStash = true
 [color]
 	ui = auto
-[init]
-	templatedir = ~/.config/git/template
 [gpg]
 	program = gpg2
