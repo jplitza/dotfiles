@@ -1,10 +1,20 @@
 #!/bin/sh
+
+RET=0
+
 if which flake8; then
   flake8 --ignore=E501 .
+  RET=$?
 elif which pep8; then
   pep8 --ignore=E501 .
+  RET=$?
 fi
 
 if which shellcheck; then
   find . -name '*.sh' -exec shellcheck {} +
+  if [ "$?" -gt "$RET" ]; then
+    RET=$?
+  fi
 fi
+
+exit $RET
