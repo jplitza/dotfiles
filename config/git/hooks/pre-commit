@@ -1,20 +1,40 @@
 #!/bin/sh
 
+TMP_WORKTREE="$(mktemp -d)"
+
+git checkout-index --prefix="${TMP_WORKTREE}/" --all
+
+run_on_files_with_ext() {
+    EXT="$1"
+    shift
+    git diff-index --cached --name-only --diff-filter=ACMR -z HEAD \
+        | sed -zn "/\.${EXT}\$/ s#^#${TMP_WORKTREE}# p" \
+        | xargs -r0 "$@"
+}
+
+max() {
+    if [ "$1" -gt "$2" ]; then
+        echo "$1"
+    else
+        echo "$2"
+    fi
+}
+
 RET=0
 
 if which flake8; then
-  flake8 --ignore=E501 .
-  RET=$?
+    run_on_files_with_ext py flake8 --ignore=E501
+    RET=$?
 elif which pep8; then
-  pep8 --ignore=E501 .
-  RET=$?
+    run_on_files_with_ext py pep8 --ignore=E501
+    RET=$?
 fi
 
 if which shellcheck; then
-  find . -name '*.sh' -exec shellcheck {} +
-  if [ "$?" -gt "$RET" ]; then
-    RET=$?
-  fi
+    run_on_files_with_ext sh shellcheck
+    RET="$(max "$RET" "$?")"
 fi
+
+rm -rf "$TMP_WORKTREE"
 
 exit $RET
