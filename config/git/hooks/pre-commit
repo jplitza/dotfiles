@@ -22,15 +22,15 @@ max() {
 
 RET=0
 
-if which flake8; then
+if which flake8 > /dev/null; then
     run_on_files_with_ext py flake8 --ignore=E501
     RET=$?
-elif which pep8; then
+elif which pep8 > /dev/null; then
     run_on_files_with_ext py pep8 --ignore=E501
     RET=$?
 fi
 
-if which shellcheck; then
+if which shellcheck > /dev/null; then
     run_on_files_with_ext sh shellcheck
     RET="$(max "$RET" "$?")"
 fi
