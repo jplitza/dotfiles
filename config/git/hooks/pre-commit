@@ -1,8 +1,8 @@
 #!/bin/sh
 
-TMP_WORKTREE="$(mktemp -d)"
+TMP_WORKTREE="$(mktemp -d)/"
 
-git checkout-index --prefix="${TMP_WORKTREE}/" --all
+git checkout-index --prefix="${TMP_WORKTREE}" --all
 
 run_on_files_with_ext() {
     EXT="$1"
