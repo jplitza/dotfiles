@@ -1,14 +1,32 @@
-#!/bin/sh
+#! /usr/bin/env bash
 
 TMP_WORKTREE="$(mktemp -d)/"
 
 git checkout-index --prefix="${TMP_WORKTREE}" --all
 
+ext_or_shebang() {
+    local FILE="$1"
+    local EXT="$2"
+    local SHEBANG="$3"
+
+    if [[ "$FILE" = *".${EXT}" ]]; then
+        printf "%s\0" "$FILE"
+    else
+        read -r -n 2 MAGIC < "$FILE"
+        if [[ "$MAGIC" = "#!" ]] && head -n1 "$FILE" | grep -q "$SHEBANG"; then
+            printf "%s\0" "$FILE"
+        fi
+    fi
+}
+
 run_on_files_with_ext() {
-    EXT="$1"
-    shift
+    local EXT="$1"
+    local SHEBANG="$2"
+    shift 2
     git diff-index --cached --name-only --diff-filter=ACMR -z HEAD \
-        | sed -zn "/\.${EXT}\$/ s#^#${TMP_WORKTREE}# p" \
+        | sed -zn "s#^#${TMP_WORKTREE}# p" \
+        | while read -r -d $'\0' FILE; do ext_or_shebang "$FILE" "$EXT" "$SHEBANG"; done \
+        | tee /tmp/debug \
         | xargs -r0 "$@"
 }
 
@@ -20,21 +38,25 @@ max() {
     fi
 }
 
-RET=0
+declare -i RET=0
 
-if which flake8 > /dev/null; then
-    run_on_files_with_ext py flake8 --ignore=E501
+if command -v flake8 > /dev/null; then
+    run_on_files_with_ext py python flake8 --ignore=E501,W503
     RET=$?
-elif which pep8 > /dev/null; then
-    run_on_files_with_ext py pep8 --ignore=E501
+elif command -v pep8 > /dev/null; then
+    run_on_files_with_ext py python pep8 --ignore=E501,W503
     RET=$?
 fi
 
-if which shellcheck > /dev/null; then
-    run_on_files_with_ext sh shellcheck
+if command -v php > /dev/null; then
+    run_on_files_with_ext php php php -l
+fi
+
+if command -v shellcheck > /dev/null; then
+    run_on_files_with_ext sh '\b\(bash\|sh\)' shellcheck -x
     RET="$(max "$RET" "$?")"
 fi
 
 rm -rf "$TMP_WORKTREE"
 
-exit $RET
+exit "$RET"
