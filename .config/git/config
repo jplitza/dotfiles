@@ -26,5 +26,3 @@
 	autoStash = true
 [color]
 	ui = auto
-[gpg]
-	program = gpg2
