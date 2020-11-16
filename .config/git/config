@@ -26,3 +26,5 @@
 	autoStash = true
 [color]
 	ui = auto
+[pull]
+	rebase = true
