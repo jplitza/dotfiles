@@ -26,7 +26,6 @@ run_on_files_with_ext() {
     git diff-index --cached --name-only --diff-filter=ACMR -z HEAD \
         | sed -zn "s#^#${TMP_WORKTREE}# p" \
         | while read -r -d $'\0' FILE; do ext_or_shebang "$FILE" "$EXT" "$SHEBANG"; done \
-        | tee /tmp/debug \
         | xargs -r0 "$@"
 }
 
